@@ -25,7 +25,7 @@ export default function ControlPanel({
     onCmd?: (msg: string) => void,
     onClear?: () => void
 }) {
-    const [targetMode, setTargetMode] = useState("Global");
+    const [targetMode, setTargetMode] = useState("All");
     const [cmdType, setCmdType] = useState("Hex");
     const [ccode, setCcode] = useState("");
     const [selection, setSelection] = useState("All Halls");
@@ -61,7 +61,6 @@ export default function ControlPanel({
             type: cmdType,
             id: selection,
             cmd: ccode,
-            timestamp: new Date().toISOString()
         };
 
         try {
@@ -82,13 +81,13 @@ export default function ControlPanel({
             <div className={styles.section}>
                 <label className={styles.label}>Targeting Mode</label>
                 <div className={styles.modeGrid}>
-                    {["Global", "Group", "Slave", "Booth", "PID", "Subset"].map((mode) => (
+                    {["All", "Group", "Slave", "Booth", "PID", "Subset"].map((mode) => (
                         <button
                             key={mode}
                             className={`${styles.modeBtn} ${targetMode === mode ? styles.active : ""}`}
                             onClick={() => {
                                 setTargetMode(mode);
-                                if (mode === "Global") {
+                                if (mode === "All") {
                                     setCmdType("MCMD");
                                     setSelection("All Halls");
                                 }
@@ -126,7 +125,7 @@ export default function ControlPanel({
                     value={selection}
                     onChange={(e) => setSelection(e.target.value)}
                 >
-                    {targetMode === "Global" && <option>All Halls</option>}
+                    {targetMode === "All" && <option>All Halls</option>}
                     {targetMode === "Group" && ["GA", "GB", "GC", "GD", "GE"].map(g => <option key={g} value={g}>{g}</option>)}
                     {targetMode === "Slave" && [1, 2, 3, 4, 10, 15, 24].map(s => <option key={`S${s}`} value={`S${s}`}>Slave S{s}</option>)}
                     {targetMode === "Booth" && booths.map(b => <option key={b} value={b}>{b}</option>)}

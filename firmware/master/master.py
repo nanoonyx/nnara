@@ -79,9 +79,10 @@ MASTER_DISPATCH = {
 def mqtt_callback(topic, msg):
     try:
         t_str = topic.decode()
-        data = json.loads(msg)
+        m_str = msg.decode()
         if config['debug']:
-            print(f"[{t_str}] {data}")
+            print(f"[{t_str}] {m_str}")
+        data = json.loads(m_str)
         
         # Prevent double processing (incomplete message)
         if 'target' not in data and 'id' not in data:
