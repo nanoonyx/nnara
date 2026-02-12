@@ -1,0 +1,475 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.titleArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabs {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  border-radius: 12px;
+  display: flex;
+  gap: 4px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: #a5a6bc;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.tabActive {
+  background: var(--glass);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mainContent {
+  flex: 1;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader h2 {
+  font-size: 1.25rem;
+  color: #a5a6bc;
+}
+
+.viewActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.miniBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: #a5a6bc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.stats {
+  padding: 1.5rem;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #a5a6bc;
+}
+
+.statVal {
+  color: #fff;
+  font-weight: 700;
+}
+
+.detailValue {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Signal Strength Health Colors */
+.sigGood {
+  background: #22c55e !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.sigFair {
+  background: #eab308 !important;
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+}
+
+.sigPoor {
+  background: #ef4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.signalTag {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.historyChart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.chartBar {
+  flex: 1;
+  background: var(--primary);
+  opacity: 0.6;
+  border-radius: 1px;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.operatorView,
+.setupView {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  animation: slideFade 0.4s ease-out;
+}
+
+.setupView {
+  flex-direction: column;
+}
+
+.grid2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.formRow label {
+  font-size: 0.75rem;
+  color: #a5a6bc;
+}
+
+.input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.primaryBtn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid var(--glass-border);
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fileAction {
+  display: flex;
+  gap: 1rem;
+}
+
+.helpText {
+  font-size: 0.875rem;
+  color: #a5a6bc;
+  margin-bottom: 1.5rem;
+}
+
+.dangerZone {
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.dangerZone h3 {
+  color: #f87171;
+}
+
+.dangerBtn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Compact Dashboard Styles */
+.slaveGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.compactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.miniPillar {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  gap: 2px;
+  transition: transform 0.2s;
+  cursor: help;
+}
+
+.miniPillar:hover {
+  transform: scale(2);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.pulsing {
+  animation: pulseEffect 0.5s ease-out;
+}
+
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px var(--primary);
+  }
+
+  50% {
+    transform: scale(1.5);
+    box-shadow: 0 0 20px var(--primary);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px var(--primary);
+  }
+}
+
+@keyframes breathing {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+}
+
+.statusDotSmall {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.miniColor {
+  flex: 1;
+  border-radius: 1px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.subtext {
+  font-size: 0.8rem;
+  color: #6a6b82;
+}
+
+.scrollable {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 2px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 1.5rem 0;
+}
+
+.fileStatus {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.ok {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.online {
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  animation: breathing 3s ease-in-out infinite;
+}
+
+.offline {
+  background: #f87171;
+  box-shadow: 0 0 6px #f87171;
+}
+
+/* Hierarchical Layout Styles */
+.hierarchyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.groupBlock {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+}
+
+.groupHeader h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.nestedSlaveGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.slaveNode {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  transition: all 0.2s;
+}
+
+.slaveNode:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.slaveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.slaveId {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.pillarMiniGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 8px;
+}

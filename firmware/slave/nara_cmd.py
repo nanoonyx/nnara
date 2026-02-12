@@ -1,0 +1,32 @@
+SCMD = [
+    "DEBUG",
+    "SCAN",
+    "SID","SETSID",
+    "CONFIG",
+    "STAT",
+    "SAVE",
+    "LSAVE",
+    "ZSAVE",
+    "PSAVE",
+    "NARA",
+    "NARAINIT",
+    "RESET",
+    "CID",
+    "BLINK",
+    "SDIR",
+]
+
+MELK = {
+    "ON": "7e0004ff000102",
+    "OFF": "7e0004ff000002",
+    "GREEN": "7e00050300ff00",
+    "RED": "7e000503ff0000",
+    "PINK": "7e0005038700ff",
+    "BLUE": "7e0005030000ff",
+    "WHITE": "7e000503ffffff",
+    "AURORA": "7e07030006ffff",
+    "BR1": "7e000101000000",
+    "BR5": "7e000105000000",
+    "BR20": "7e000114000000",
+    "BR100": "7e000154000000",
+}

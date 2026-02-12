@@ -1,0 +1,13 @@
+{
+    "mid": "MA",
+    "ch": 11,
+    "debug": 0,
+    "sid_min": 1,
+    "sid_max": 12,
+    "ssid": "nano",
+    "password": "@wooam1004",
+    "mqtt_broker": "192.168.45.241",
+    "mqtt_topic": "nara/cmd",
+    "mqtt_topic_stat": "nara/stat",
+    "wifi_flag": 1
+}

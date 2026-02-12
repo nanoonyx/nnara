@@ -1,0 +1,9 @@
+{
+    "mid": "MA",
+    "ch": 11,
+    "debug": 1,
+    "ssid": "nano",
+    "password": "@wooam1004",
+    "mqtt_broker": "192.168.45.241",
+    "mqtt_topic_stat": "nara/master/status"
+}

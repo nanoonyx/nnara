@@ -1,0 +1,79 @@
+.tile {
+    padding: 0.6rem !important;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sid {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.hallTag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    text-transform: uppercase;
+}
+
+.statusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.online {
+    background: #4ade80;
+    box-shadow: 0 0 6px #4ade80;
+}
+
+.offline {
+    background: #f87171;
+    box-shadow: 0 0 6px #f87171;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.6rem;
+    color: #6a6b82;
+    text-transform: uppercase;
+}
+
+.value {
+    font-size: 0.75rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.low {
+    color: #f87171;
+}

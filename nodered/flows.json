@@ -1,0 +1,147 @@
+[
+    {
+        "id": "f6f2187d.f17c28",
+        "type": "tab",
+        "label": "NNARA Command Engine",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "mqtt_in_cmd",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17c28",
+        "name": "Dash Cmd (nara/cmd)",
+        "topic": "nara/cmd",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "mqtt_broker_local",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "cmd_router"
+            ]
+        ]
+    },
+    {
+        "id": "cmd_router",
+        "type": "function",
+        "z": "f6f2187d.f17c28",
+        "name": "Route Commands",
+        "func": "// Mapping from test_pids.csv\nconst pidMap = {\n    \"P7\": { sid: \"S4\", pmac: \"BE:28:A9:00:07:83\" }, \"P131\": { sid: \"S2\", pmac: \"BE:28:A9:00:09:75\" },\n    \"P191\": { sid: \"S3\", pmac: \"BE:28:A9:00:07:41\" }, \"P3\": { sid: \"S4\", pmac: \"BE:28:A9:00:03:B8\" },\n    \"P288\": { sid: \"S2\", pmac: \"BE:28:A9:00:07:A7\" }, \"P244\": { sid: \"S2\", pmac: \"BE:28:A9:00:02:E8\" },\n    \"P14\": { sid: \"S1\", pmac: \"BE:28:A9:00:07:4E\" }, \"P33\": { sid: \"S3\", pmac: \"BE:28:A9:00:07:CC\" },\n    \"P1\": { sid: \"S1\", pmac: \"BE:28:A9:00:03:EA\" }, \"P95\": { sid: \"S3\", pmac: \"BE:28:A9:00:05:5A\" },\n    \"P87\": { sid: \"S3\", pmac: \"BE:28:A9:00:07:5A\" }, \"P2\": { sid: \"S1\", pmac: \"BE:28:A9:00:02:ED\" },\n    \"P215\": { sid: \"S2\", pmac: \"BE:28:A9:00:02:DA\" }, \"P6\": { sid: \"S4\", pmac: \"BE:28:A9:00:02:BA\" },\n    \"P176\": { sid: \"S2\", pmac: \"BE:28:A9:00:08:F8\" }, \"P5\": { sid: \"S1\", pmac: \"BE:28:A9:00:07:5F\" },\n    \"P148\": { sid: \"S3\", pmac: \"BE:28:A9:00:05:AC\" }, \"P141\": { sid: \"S3\", pmac: \"BE:28:A9:00:05:A4\" },\n    \"P59\": { sid: \"S3\", pmac: \"BE:28:25:00:04:F7\" }, \"P11\": { sid: \"S4\", pmac: \"BE:28:A9:00:08:8E\" },\n    \"P10\": { sid: \"S2\", pmac: \"BE:28:A9:00:07:A0\" }, \"P161\": { sid: \"S2\", pmac: \"BE:28:A9:00:02:D8\" },\n    \"P9\": { sid: \"S4\", pmac: \"BE:28:A9:00:07:CD\" }, \"P13\": { sid: \"S4\", pmac: \"BE:28:A9:00:02:D4\" },\n    \"P165\": { sid: \"S2\", pmac: \"BE:28:A9:00:03:B9\" }, \"P4\": { sid: \"S1\", pmac: \"BE:28:A9:00:03:E7\" },\n    \"P331\": { sid: \"S3\", pmac: \"BE:28:25:00:04:DF\" }, \"P57\": { sid: \"S3\", pmac: \"BE:28:A9:00:05:4F\" },\n    \"P15\": { sid: \"S4\", pmac: \"BE:28:A9:00:07:4C\" }, \"P8\": { sid: \"S4\", pmac: \"BE:28:A9:00:08:D4\" },\n    \"P101\": { sid: \"S2\", pmac: \"BE:28:A9:00:07:B5\" }, \"P146\": { sid: \"S3\", pmac: \"BE:28:A9:00:03:DC\" },\n    \"P455\": { sid: \"S2\", pmac: \"BE:28:A9:00:06:14\" }\n};\n\nconst slaveMap = {\n    \"S1\": \"24:ec:4a:ca:4f:5c\", \"S2\": \"24:ec:4a:ca:4f:64\", \"S3\": \"24:ec:4a:ca:4f:d0\",\n    \"S4\": \"24:ec:4a:ca:5b:a8\", \"S5\": \"24:ec:4a:ca:5d:70\", \"S6\": \"24:ec:4a:ca:5d:cc\",\n    \"S7\": \"24:ec:4a:ca:62:50\", \"S8\": \"24:ec:4a:ca:63:78\", \"S9\": \"24:ec:4a:ca:8b:f0\",\n    \"S10\": \"24:ec:4a:ca:8d:38\", \"S11\": \"24:ec:4a:ca:99:48\", \"S12\": \"24:ec:4a:ca:9c:0c\",\n    \"S13\": \"58:8c:81:a4:a8:ec\", \"S14\": \"58:8c:81:a5:04:a0\", \"S15\": \"58:8c:81:ae:c9:cc\",\n    \"S16\": \"58:8c:81:af:29:5c\", \"S17\": \"58:8c:81:af:b9:1c\", \"S18\": \"58:8c:81:af:ce:0c\",\n    \"S19\": \"58:8c:81:b0:fa:1c\", \"S20\": \"58:8c:81:b2:20:68\", \"S21\": \"58:8c:81:b2:3b:50\",\n    \"S22\": \"58:8c:81:b2:3d:a8\", \"S23\": \"58:8c:81:b2:53:74\", \"S24\": \"58:8c:81:b2:5b:2c\"\n};\n\n// Extract payload\nconst { target, type, id, cmd } = msg.payload;\n\n// Decision Logic\nif (target === \"Global\") {\n    msg.topic = \"nara/master/global\";\n    msg.payload = { cmd: cmd, dst: \"broadcast\" };\n    return msg;\n}\n\nif (target === \"Group\") {\n    msg.topic = `nara/group/${id}`;\n    msg.payload = { cmd: cmd, dst: \"broadcast\" };\n    return msg;\n}\n\nif (target === \"Slave\") {\n    msg.topic = `nara/slave/${id}/in`;\n    msg.payload = { \n        target: \"Slave\",\n        id: id,\n        cmd: cmd,\n        dst: slaveMap[id] || \"broadcast\"\n    };\n    return msg;\n}\n\nif (target === \"PID\") {\n    const pInfo = pidMap[id];\n    if (pInfo) {\n        msg.topic = `nara/slave/${pInfo.sid}/in`;\n        msg.payload = { \n            target: \"PID\",\n            id: id,\n            cmd: cmd,\n            pmac: pInfo.pmac,\n            dst: slaveMap[pInfo.sid] || \"broadcast\"\n        };\n        return msg;\n    } else {\n        // Fallback for unknown PID\n        msg.topic = `nara/pid/${id}/in`;\n        msg.payload = { \n            target: \"PID\",\n            id: id,\n            cmd: cmd,\n            dst: \"broadcast\" \n        };\n        return msg;\n    }\n}\n\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "mqtt_out_master",
+                "debug_log"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_out_master",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17c28",
+        "name": "Send to Masters",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "broker": "mqtt_broker_local",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "mqtt_status_in",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17c28",
+        "name": "Master Status In",
+        "topic": "nara/master/status",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "mqtt_broker_local",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "status_bridge"
+            ]
+        ]
+    },
+    {
+        "id": "status_bridge",
+        "type": "function",
+        "z": "f6f2187d.f17c28",
+        "name": "Status Bridge",
+        "func": "// This function receives telemetry from masters \n// and formats it for the Dashboard's expected topics\n\nif (msg.payload.pid) {\n    const pid = msg.payload.pid;\n    msg.topic = `nara/status/pid/${pid}`;\n    return msg;\n}\n\nif (msg.payload.sid) {\n    const sid = msg.payload.sid;\n    msg.topic = `nara/status/slaves/${sid}`;\n    return msg;\n}\n\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "mqtt_out_dash_status"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_out_dash_status",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17c28",
+        "name": "Dash Status Out",
+        "topic": "",
+        "qos": "1",
+        "retain": "true",
+        "broker": "mqtt_broker_local",
+        "x": 620,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "debug_log",
+        "type": "debug",
+        "z": "f6f2187d.f17c28",
+        "name": "Cmd Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "mqtt_broker_local",
+        "type": "mqtt-broker",
+        "name": "Local RPi Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "nodered-engine",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "nara/system/engine",
+        "birthQos": "1",
+        "birthPayload": "online",
+        "closeTopic": "nara/system/engine",
+        "closeQos": "1",
+        "closePayload": "offline",
+        "willTopic": "nara/system/engine",
+        "willQos": "1",
+        "willPayload": "offline"
+    }
+]

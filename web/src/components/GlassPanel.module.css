@@ -1,0 +1,13 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #a5a6bc;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

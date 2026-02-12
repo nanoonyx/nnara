@@ -1,0 +1,100 @@
+.container {
+    gap: 1.5rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6a6b82;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.modeGrid,
+.typeGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.modeBtn,
+.typeBtn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #a5a6bc;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.modeBtn:hover,
+.typeBtn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.active {
+    background: var(--primary) !important;
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.select,
+.input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+.inputGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input {
+    flex: 1;
+    font-family: monospace;
+}
+
+.sendBtn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.historyItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #a5a6bc;
+}
+
+.time {
+    opacity: 0.5;
+}
