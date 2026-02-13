@@ -125,9 +125,10 @@ export default function ControlPanel({
                     value={selection}
                     onChange={(e) => setSelection(e.target.value)}
                 >
-                    {targetMode === "All" && <option>All Halls</option>}
+                    {targetMode === "All" && ["All","MA", "MB"].map(h => <option key={h} value={h}>{h}</option>)}
+                    {/* {>All Halls</option>} */}
                     {targetMode === "Group" && ["GA", "GB", "GC", "GD", "GE"].map(g => <option key={g} value={g}>{g}</option>)}
-                    {targetMode === "Slave" && [1, 2, 3, 4, 10, 15, 24].map(s => <option key={`S${s}`} value={`S${s}`}>Slave S{s}</option>)}
+                    {targetMode === "Slave" && [1, 2, 3, 4, 10, 15, 24].map(s => <option key={`S${s}`} value={`S${s}`}>S{s}</option>)}
                     {targetMode === "Booth" && booths.map(b => <option key={b} value={b}>{b}</option>)}
                     {targetMode === "PID" && pids.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
