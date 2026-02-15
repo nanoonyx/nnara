@@ -601,14 +601,14 @@ def init_system():
     esp.active(True)
     esp.irq(recv_cb)
 
-    # Add SID Peers
+    ## Add SID Peers
     for s in sids:
         try:
             esp.add_peer(binascii.unhexlify(s))
         except:
             pass
 
-    # Add Broadcast Peer
+    ## Add Broadcast Peer
     try:
         esp.add_peer(bcast)
     except:
